@@ -5,19 +5,33 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="https://bootstrap-table.com/docs/extensions/filter-control/bootstrap-table-filter-control.css">
+        <script src="https://bootstrap-table.com/docs/bootstrap-table-filter-control.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+          .my-custom-scrollbar {
+            position: relative;
+            height: 400px;
+            overflow: auto;
+                }
+          .table-wrapper-scroll-y {
+            display: block;
+                }
+               
+        </style>
         
     </head>
-    <style>
-      .my-custom-scrollbar {
-        position: relative;
-        height: 400px;
-        overflow: auto;
-            }
-      .table-wrapper-scroll-y {
-        display: block;
-            }
-           
-    </style>
+    <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+      </script>
     <body class="container-fluid" style="background-color:white;">
         <nav class="navbar navbar-light" style="background-color:#063970;">
             <div class="container-fluid">
@@ -60,20 +74,20 @@
             <input type="text" style="margin-left: 800px;" placeholder="Search..">
             <br><br>
       <div class="table-wrapper-scroll-y my-custom-scrollbar">
-        <table width = "90%" class="table table-bordered table-hover" align="center">
+        <table id="table" width = "90%" class="table table-bordered table-hover" data-search="true" data-filter-control="true" data-click-to-select="true">
           <tbody>
             <thead>
-            <tr style="background-color:lightgreen;">
-              <th style="width: 10px;"></th>  
-              <th>Trade commodity</th>
-              <th>Trade code</th>
-              <th>Date</th>
-              <th>Outbound status</th>
-              <th>Inbound status</th>
-              <th>Remarks</th>
-            </tr>
-          </thead>
-            <tr>
+              <tr style="background-color:lightgreen;">
+                <th style="width: 10px;"></th>  
+                <th data-filter-control="input" data-sortable="true">Trade commodity</th>
+                <th data-filter-control="input" data-sortable="true">Trade code</th>
+                <th data-filter-control="input" data-sortable="true">Date</th>
+                <th data-filter-control="select" data-sortable="true">Outbound status</th>
+                <th data-filter-control="select" data-sortable="true">Inbound status</th>
+                <th data-filter-control="input" data-sortable="true">Remarks</th>
+              </tr>
+            </thead>
+            <tr onclick="myfunc()">
               <td><input type="radio" name="check"></td>
               <td>FX</td>
               <td>BARC/LDN</td>
@@ -82,8 +96,8 @@
               <td>Received</td>
               <td></td>
             </tr>
-            <tr>
-              <td><input type="radio" name="check" ></td>  
+            <tr onclick="myfunc()">
+              <td><input type="radio" name="check"></td>  
               <td>Derivatives</td>
               <td>MSCG/NY</td>
               <td>20/07/2021</td>
@@ -91,8 +105,8 @@
               <td>Not received</td>
               <td></td>
             </tr>
-            <tr>
-                <td><input type="radio" name="check"></td> 
+            <tr onclick="myfunc()">
+                <td><input type="radio" name="check" id="id1"></td> 
                 <td>FX</td>
                 <td>CITI/NY</td>
                 <td>20/07/2021</td>
@@ -100,7 +114,7 @@
                 <td>Received</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr onclick="myfunc()">
                 <td><input type="radio" name="check"></td> 
                 <td>FI</td>
                 <td>DEUTB/FRA</td>
@@ -109,7 +123,7 @@
                 <td>Not received</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr onclick="myfunc()">
                 <td><input type="radio" name="check"></td> 
                 <td>Derivatives</td>
                 <td>ANZ/MEL</td>
@@ -118,7 +132,7 @@
                 <td>Not received</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr onclick="myfunc()">
                 <td><input type="radio" name="check"></td> 
                 <td>FX</td>
                 <td>ANZ/MEL</td>
@@ -178,5 +192,7 @@
         <div class="text-center">
           <button type="button" class="btn btn-primary">Open</button>
           </div>
+          <script>
+            </script>
     </body>
 </html>
