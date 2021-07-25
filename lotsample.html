@@ -19,6 +19,10 @@
             });
           });
         });
+        $(document).on('click','tr',function(){
+          $(this).find('input[type="radio"]').prop('checked',true);
+            
+        });
         </script>
     <style>
       .my-custom-scrollbar {
